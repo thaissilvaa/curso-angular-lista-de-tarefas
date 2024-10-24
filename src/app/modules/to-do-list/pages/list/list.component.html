@@ -1,18 +1,41 @@
-<div class="container">
-    <img src="../../../../../assets/img/task-list-null.png"
-    alt="Sua lista está vazia - imagem ilustrativa"
-    loading="eager"
+@if(!getListItems().length){
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/troquatte/curso-angular-lista-de-tarefas/refs/heads/master/src/assets/img/task-list-null.png"
+        alt="Sua lista está vazia - imagem ilustrativa"
+        loading="eager"
+        />
+
+        @if(addItem()){
+            <button class="btn btn-primary" (click)="addItem.set(false)"> 
+                Crie uma lista de tarefas 
+            </button>
+        } 
+        
+        @else {
+            <app-input-add-item 
+                [inputListItems]="getListItems()"
+                (outputAddListItems)="getInputAddItem($event)"
+            />
+        }
+    </div>
+}
+
+@else {
+    <app-input-add-item 
+    [inputListItems]="getListItems()"
+    (outputAddListItems)="getInputAddItem($event)"
     />
 
-    <button class="btn btn-primary"> Crie uma lista de tarefas </button>
+    <main class="container">
+        
+    </main>
 
-    <div>
-        <label class="input-label-text" for="inputValue">
-            <input type="text" placeholder="Adicione um novo item" id="inputValue" autofocus >
-
-            <button class="btn btn-primary-circle"
-            title="Adicionar novo item">
-            </button>
-        </label>
-    </div>
-</div>
+    <footer>
+        <button 
+            class="btn btn-danger"
+            (click)="deleteAllItems()"
+        >
+            Deletar todos os itens
+        </button>
+    </footer>
+}
