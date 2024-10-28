@@ -16,6 +16,11 @@
             autofocus
         />
 
-        <button class="btn btn-danger-circle" title="Delete este item"></button>
+        <button 
+            class="btn btn-danger-circle" 
+            title="Delete este item"
+            (click)="deleteItemText(item.id)"
+        >
+        </button>
     </label>
 }
